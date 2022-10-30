@@ -19,17 +19,17 @@
             fixDashboard();
         }
     });
-    // #dashboard-feed-frame for those not on A/B, .js-feed-container for those stuck with it.
+    /* #dashboard-feed-frame for those not on A/B, .js-feed-container for those stuck with it. */
     const displayedDashboard = document.querySelector("#dashboard-feed-frame") || document.querySelector(".js-feed-container");
 
-    const dashboardContents = document.createElement("template")
+    const dashboardContents = document.createElement("template");
     dashboardContents.innerHTML = `<p style="margin:0">Updating...</p>${localStorage.getItem("dashboardCache") || ""}`;
     let nextPage = 1;
 
     fixDashboard();
     fetchDashboard();
 
-    // GitHub updated the feed every minute unless the user has loaded more, so we'll do the same.
+    /* GitHub updated the feed every minute unless the user has loaded more, so we'll do the same. */
     const updateTimer = setInterval(() => {
         if (nextPage === 2) {
             nextPage--;
@@ -70,7 +70,7 @@
                     localStorage.setItem("dashboardCache", html);
                 } else {
                     dashboardContents.innerHTML += html;
-                    // GitHub's API only ever returns 2 pages of results, so no point in showing the load more button.
+                    /* GitHub's API only ever returns 2 pages of results, so no point in showing the load more button. */
                     const updateForm = dashboardContents.content.querySelector('.ajax-pagination-form');
                     updateForm.remove();
                 }
